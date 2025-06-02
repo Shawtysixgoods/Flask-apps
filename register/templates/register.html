@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <!-- Простые стили для формы -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn {
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        .flash-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .flash-success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .flash-error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+    <h2>Регистрация</h2>
+    
+    <!-- Вывод flash-сообщений -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <!-- Форма регистрации -->
+    <form method="POST">
+        {{ form.hidden_tag() }}  <!-- CSRF-токен для защиты формы -->
+        
+        <!-- Поле для имени пользователя -->
+        <div class="form-group">
+            {{ form.username.label }}<br>
+            {{ form.username(class="form-control") }}
+            {% for error in form.username.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+        
+        <!-- Поле для пароля -->
+        <div class="form-group">
+            {{ form.password.label }}<br>
+            {{ form.password(class="form-control") }}
+            {% for error in form.password.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+        
+        <!-- Поле для подтверждения пароля -->
+        <div class="form-group">
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(class="form-control") }}
+            {% for error in form.confirm_password.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+        
+        <!-- Кнопка отправки формы -->
+        <div class="form-group">
+            {{ form.submit(class="btn") }}
+        </div>
+    </form>
+</body>
+</html>
