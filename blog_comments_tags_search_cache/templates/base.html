@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Блог с комментариями, тегами, поиском и кешированием{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Главная</a>
+        <a href="{{ url_for('new_post') }}">Новая запись</a>
+        <form action="{{ url_for('search') }}" method="get" style="display:inline;">
+            <input type="text" name="q" placeholder="Поиск..." value="{{ request.args.get('q','') }}">
+            <button type="submit">Искать</button>
+        </form>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>Блог с комментариями, тегами, поиском и кешированием на Flask</p>
+    </footer>
+</body>
+</html>

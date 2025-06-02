@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - Блог с SQLite{% endblock %}
+
+{% block content %}
+    <article class="post-detail">
+        <h1>{{ post.title }}</h1>
+        <p class="meta">{{ post.created.strftime('%d.%m.%Y %H:%M') }}</p>
+        <div>{{ post.content|safe }}</div>
+    </article>
+{% endblock %}

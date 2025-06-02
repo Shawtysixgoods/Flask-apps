@@ -1,0 +1,4 @@
+Flask==3.0.0
+Markdown==3.5.1
+python-frontmatter==1.0.0
+python-slugify==8.0.1

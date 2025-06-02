@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Блог с админкой</title>
+    <!-- Используем Bootstrap для базового оформления -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Блог</h1>
+        <ul class="list-unstyled">
+            {% for post in posts %}
+                <li class="well">
+                    <h3>{{ post.title }}</h3>
+                    <small>{{ post.created.strftime('%d.%m.%Y') }}</small>
+                    <p>{{ post.content }}</p>
+                </li>
+            {% else %}
+                <li>Нет статей.</li>
+            {% endfor %}
+        </ul>
+        <p><a href="/admin/">Перейти в админ панель</a></p>
+    </div>
+</body>
+</html>

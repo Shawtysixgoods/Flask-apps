@@ -1,0 +1,10 @@
+<!-- Этот шаблон содержит навигационное меню, которое включается на каждой странице приложения -->
+<nav>
+    <!-- url_for генерирует правильные URL для маршрутов -->
+    <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>
+        Главная
+    </a>
+    <a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>
+        О проекте
+    </a>
+</nav>

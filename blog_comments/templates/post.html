@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - Блог с комментариями{% endblock %}
+
+{% block content %}
+    <article class="post-detail">
+        <h1>{{ post.title }}</h1>
+        <p class="meta">{{ post.created.strftime('%d.%m.%Y %H:%M') }}</p>
+        <div class="content">{{ post.content | safe }}</div>
+    </article>
+    <section class="comments">
+        <h2>Комментарии</h2>
+        {% for comment in post.comments %}
+            <div class="comment">
+                <p>
+                    <strong>{{ comment.author }}</strong>
+                    ({{ comment.created.strftime('%d.%m.%Y %H:%M') }})
+                </p>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% else %}
+            <p>Нет комментариев.</p>
+        {% endfor %}
+    </section>
+    <section class="add-comment">
+        <h2>Добавить комментарий</h2>
+        <form method="post" action="{{ url_for('post_detail', post_id=post.id) }}">
+            {{ form.hidden_tag() }}
+            <label for="author">Имя:</label><br>
+            {{ form.author(size=40) }}<br><br>
+            <label for="content">Комментарий:</label><br>
+            {{ form.content(rows=4, cols=50) }}<br><br>
+            {{ form.submit() }}
+        </form>
+    </section>
+{% endblock %}

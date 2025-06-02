@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Метаданные страницы -->
+    <meta charset="UTF-8">
+    <!-- Jinja2 подставляет значение переменной title -->
+    <title>{{ title }}</title>
+    <!-- Подключаем CSS через функцию url_for -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Подключаем шаблон навигации -->
+    {% include 'nav.html' %}
+    
+    <!-- Основной контент -->
+    <h1>Привет, Flask!</h1>
+    
+    <!-- Форма отправляет POST-запрос на /add_item -->
+    <form action="{{ url_for('add_item') }}" method="POST">
+        <input type="text" name="item" placeholder="Введите элемент">
+        <button type="submit">Добавить</button>
+    </form>
+
+    <h2>Список элементов:</h2>
+    <ul>
+        {% for item in items %}
+            <li>
+                <!-- Пример генерации URL для динамической страницы -->
+                <a href="{{ url_for('item', name=item) }}">{{ item }}</a>
+            </li>
+        {% else %}
+            <li>Список пуст</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Пример условия, если количество элементов больше 5 -->
+    {% if items|length > 5 %}
+        <p>Список становится длинным!</p>
+    {% endif %}
+</body>
+</html>

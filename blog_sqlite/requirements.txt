@@ -1,0 +1,3 @@
+# Зависимости для блога с SQLite.
+Flask==3.0.0
+Flask-SQLAlchemy==3.0.3

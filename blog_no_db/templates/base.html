@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <!-- Базовый шаблон, переопределяемый дочерними шаблонами -->
+    <title>{% block title %}Блог без БД{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Простая навигация между страницами -->
+    <nav>
+        <a href="{{ url_for('index') }}">Главная</a>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>Блог без БД на Flask</p>
+    </footer>
+</body>
+</html>

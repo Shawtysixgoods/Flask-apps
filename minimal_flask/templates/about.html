@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <!-- Заголовок задается динамически через переменную title -->
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Простая навигация: ссылки ведут на главную и страницу "О проекте" -->
+    <nav>
+        <a href="{{ url_for('index') }}">Главная</a>
+        <a href="{{ url_for('about') }}">О проекте</a>
+    </nav>
+    <h1>О проекте</h1>
+    <p>Это демонстрация минимального Flask-приложения с использованием Flask, Jinja2 и Werkzeug.</p>
+</body>
+</html>

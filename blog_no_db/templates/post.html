@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.metadata['title'] }} - Блог без БД{% endblock %}
+
+{% block content %}
+    <article class="post">
+        <h1>{{ post.metadata['title'] }}</h1>
+        <div class="post-meta">
+            <time>{{ post.metadata['date'].strftime('%d.%m.%Y') }}</time>
+            {% if post.metadata.author %}
+                | {{ post.metadata.author }}
+            {% endif %}
+        </div>
+        <div class="post-content">
+            {{ post.content|safe }}
+        </div>
+    </article>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Новая запись - Блог с комментариями{% endblock %}
+
+{% block content %}
+    <h1>Создать новую запись</h1>
+    <form method="post" action="{{ url_for('new_post') }}">
+        <label for="title">Заголовок:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+        <label for="content">Контент:</label><br>
+        <textarea id="content" name="content" rows="10" required></textarea><br><br>
+        <button type="submit">Создать запись</button>
+    </form>
+{% endblock %}

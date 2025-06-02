@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Новая запись - Блог с комментариями и тегами{% endblock %}
+
+{% block content %}
+    <h1>Создать новую запись</h1>
+    <form method="post" action="{{ url_for('new_post') }}">
+        {{ form.hidden_tag() }}
+        <label for="title">Заголовок:</label>
+        {{ form.title(size=60) }}
+        <label for="content">Контент:</label>
+        {{ form.content(rows=10, cols=60) }}
+        <label for="tags">Тэги (через запятую):</label>
+        {{ form.tags(size=60) }}
+        {{ form.submit() }}
+    </form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Поиск - Блог с комментариями и тегами{% endblock %}
+
+{% block content %}
+    <h1>Результаты поиска</h1>
+    {% if query %}
+        <p>По запросу: <strong>{{ query }}</strong></p>
+    {% endif %}
+    {% for post in posts %}
+    <article class="post">
+        <h2>
+            <a href="{{ url_for('post_detail', post_id=post.id) }}">
+                {{ post.title }}
+            </a>
+        </h2>
+        <p class="meta">{{ post.created.strftime('%d.%m.%Y %H:%M') }}</p>
+        <p>
+            {% for tag in post.tags %}
+                <span class="tag">{{ tag.name }}</span>
+            {% endfor %}
+        </p>
+        <p>{{ post.content[:200] }}{% if post.content|length > 200 %}...{% endif %}</p>
+    </article>
+    {% else %}
+        <p>Ничего не найдено.</p>
+    {% endfor %}
+{% endblock %}

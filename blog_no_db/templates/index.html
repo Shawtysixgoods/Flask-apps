@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Главная - Блог без БД{% endblock %}
+
+{% block content %}
+    <h1>Последние публикации</h1>
+    {% for post in posts %}
+    <article class="post-preview">
+        <h2>
+            <a href="{{ url_for('post', slug=post.metadata['slug']) }}">
+                {{ post.metadata['title'] }}
+            </a>
+        </h2>
+        <div class="post-meta">
+            <time>{{ post.metadata['date'].strftime('%d.%m.%Y') }}</time>
+            {% if post.metadata.author %}
+                | {{ post.metadata.author }}
+            {% endif %}
+        </div>
+        {% if post.metadata.description %}
+            <p>{{ post.metadata.description }}</p>
+        {% endif %}
+    </article>
+    {% else %}
+        <p>Нет записей.</p>
+    {% endfor %}
+{% endblock %}

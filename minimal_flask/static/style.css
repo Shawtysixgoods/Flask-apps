@@ -1,0 +1,72 @@
+/* Основные стили для минимального приложения */
+/* Базовые настройки для body: шрифт, ширина, отступы */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;  /* Центрирование содержимого */
+    padding: 20px;
+}
+
+/* Стилизация навигационного меню */
+nav {
+    margin-bottom: 20px;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+nav a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+}
+
+/* Активная ссылка выделяется другим цветом */
+nav a.active {
+    background: #007bff;
+    color: white;
+    border-radius: 3px;
+}
+
+/* Стили формы: отступы, фон, скругление углов */
+form {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 8px 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Стили для списка элементов */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+li a {
+    color: #007bff;
+    text-decoration: none;
+}
