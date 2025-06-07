@@ -1,0 +1,40 @@
+{#
+    topic.html — шаблон для вывода всех постов в теме
+    Jinja2 — шаблонизатор, используемый Flask
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ topic.title }}</title>
+</head>
+<body>
+    <h1>Тема: {{ topic.title }}</h1>
+    {#
+        Ссылка на добавление нового поста в тему
+    #}
+    <p><a href="{{ url_for('new_post', topic_id=topic.id) }}">Добавить пост</a></p>
+    <ul>
+    {#
+        Перебираем все посты и выводим их содержимое с ссылкой на подробный просмотр
+    #}
+    {% for post in posts %}
+        <li>
+            <a href="{{ url_for('post_detail', post_id=post.id) }}">Пост №{{ post.id }}</a>: {{ post.content[:50] }}...
+        </li>
+    {% else %}
+        <li>Постов пока нет.</li>
+    {% endfor %}
+    </ul>
+    <p><a href="{{ url_for('index') }}">Назад к списку тем</a></p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

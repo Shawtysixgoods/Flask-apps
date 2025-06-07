@@ -1,0 +1,37 @@
+{#
+    index.html — основной шаблон для отображения формы и приветствия пользователя
+    Jinja2 — шаблонизатор, используемый Flask
+    Подробнее: https://jinja.palletsprojects.com/
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask session пример</title>
+    {#
+        Здесь можно подключить стили, если нужно
+    #}
+</head>
+<body>
+    <h1>Пример работы сессий во Flask</h1>
+    {#
+        Проверяем, есть ли имя пользователя в сессии
+        Если есть — приветствуем пользователя и даём ссылку на выход
+        Если нет — показываем форму для ввода имени
+    #}
+    {% if username %}
+        <p>Привет, {{ username }}!</p>
+        <p><a href="{{ url_for('logout') }}">Выйти</a></p>
+    {% else %}
+        <form method="POST">
+            <label for="username">Введите ваше имя:</label>
+            <input type="text" id="username" name="username" required>
+            <button type="submit">Войти</button>
+        </form>
+    {% endif %}
+    {#
+        url_for — функция Flask для генерации URL по имени маршрута
+        Подробнее: https://flask.palletsprojects.com/en/latest/quickstart/#url-building
+    #}
+</body>
+</html>

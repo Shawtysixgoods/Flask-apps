@@ -1,0 +1,58 @@
+{#
+    index.html — основной шаблон для отображения формы
+    Jinja2 — шаблонизатор, используемый Flask
+    Подробнее: https://jinja.palletsprojects.com/
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask-WTF пример</title>
+    {#
+        Подключение стилей (если есть)
+        Можно добавить свой файл style.css
+    #}
+</head>
+<body>
+    <h1>Пример формы с Flask-WTF</h1>
+    {#
+        Форма создаётся с помощью Flask-WTF и WTForms
+        form.hidden_tag() — добавляет скрытые поля, необходимые для защиты от CSRF-атак
+        Подробнее: https://flask-wtf.readthedocs.io/en/stable/csrf.html
+    #}
+    <form method="POST">
+        {{ form.hidden_tag() }} {# Скрытое поле для CSRF #}
+        <p>
+            {#
+                Выводим поле для ввода имени
+                form.name.label — подпись к полю
+                form.name — само поле ввода
+                size=32 — атрибут для задания ширины поля
+            #}
+            {{ form.name.label }}<br>
+            {{ form.name(size=32) }}
+        </p>
+        <p>
+            {#
+                Кнопка отправки формы
+                form.submit() — кнопка отправки, определённая в классе формы
+            #}
+            {{ form.submit() }}
+        </p>
+    </form>
+    {#
+        Выводим flash-сообщения, если они есть
+        Подробнее: https://flask.palletsprojects.com/en/latest/patterns/flashing/
+        get_flashed_messages() — функция для получения сообщений
+    #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li> {# Выводим каждое сообщение #}
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

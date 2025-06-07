@@ -1,0 +1,31 @@
+{#
+    new_post.html — шаблон для создания нового поста в теме
+    Jinja2 — шаблонизатор, используемый Flask
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить пост</title>
+</head>
+<body>
+    <h1>Добавить пост в тему: {{ topic.title }}</h1>
+    <form method="POST">
+        <label for="username">Имя пользователя:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="content">Содержимое поста:</label><br>
+        <textarea id="content" name="content" rows="5" cols="40" required></textarea><br>
+        <button type="submit">Добавить</button>
+    </form>
+    <p><a href="{{ url_for('topic_detail', topic_id=topic.id) }}">Назад к теме</a></p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

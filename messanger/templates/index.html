@@ -1,0 +1,59 @@
+{#
+    index.html — шаблон для вывода всех пользователей
+    Jinja2 — шаблонизатор, используемый Flask
+    Подробнее: https://jinja.palletsprojects.com/
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мессенджер</title>
+</head>
+<body>
+    <h1>Список пользователей</h1>
+    {#
+        Ссылка на регистрацию нового пользователя
+        url_for — функция Flask для генерации URL по имени маршрута
+    #}
+    <p><a href="{{ url_for('register') }}">Зарегистрировать нового пользователя</a></p>
+    <ul>
+    {#
+        Перебираем всех пользователей и выводим их имена
+        Для каждого пользователя выводим ссылки на диалоги с другими пользователями
+    #}
+    {% for user in users %}
+        <li>
+            <strong>{{ user.username }}</strong>
+            {#
+                Для каждого другого пользователя создаём ссылку на диалог
+            #}
+            <ul>
+            {% for other in users %}
+                {% if other.id != user.id %}
+                    <li>
+                        <a href="{{ url_for('dialog', user1_id=user.id, user2_id=other.id) }}">
+                            Диалог с {{ other.username }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </li>
+    {% else %}
+        <li>Пользователей пока нет.</li>
+    {% endfor %}
+    </ul>
+    {#
+        Выводим flash-сообщения, если они есть
+    #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

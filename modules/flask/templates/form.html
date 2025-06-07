@@ -1,0 +1,24 @@
+{#
+    form.html — шаблон для примера формы
+    Jinja2 — шаблонизатор, используемый Flask
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма</title>
+</head>
+<body>
+    <h1>Пример формы во Flask</h1>
+    {#
+        Форма отправляется методом POST на этот же маршрут
+        Атрибут required делает поле обязательным для заполнения
+    #}
+    <form method="POST">
+        <label for="username">Введите имя:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">Отправить</button>
+    </form>
+    <p><a href="{{ url_for('index') }}">На главную</a></p>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{#
+    post.html — шаблон для просмотра отдельного поста
+    Jinja2 — шаблонизатор, используемый Flask
+    Подробнее: https://jinja.palletsprojects.com/
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <div>
+        {#
+            Выводим содержимое поста
+        #}
+        <p>{{ post.content }}</p>
+    </div>
+    {#
+        Ссылка для возврата на главную страницу
+    #}
+    <p><a href="{{ url_for('index') }}">Назад к списку постов</a></p>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{#
+    product.html — шаблон для подробного просмотра товара
+    Jinja2 — шаблонизатор, используемый Flask
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+    <p><strong>Описание:</strong> {{ product.description or 'Нет описания' }}</p>
+    <p><strong>Цена:</strong> {{ product.price }} руб.</p>
+    <p><a href="{{ url_for('index') }}">Назад к списку товаров</a></p>
+</body>
+</html>

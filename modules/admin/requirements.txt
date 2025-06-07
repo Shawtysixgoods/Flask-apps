@@ -1,0 +1,7 @@
+# requirements.txt — файл для указания зависимостей Python-проекта
+# Flask — основной веб-фреймворк
+Flask
+# Flask-SQLAlchemy — расширение для интеграции SQLAlchemy с Flask
+Flask-SQLAlchemy
+# Flask-Admin — расширение для административных интерфейсов
+Flask-Admin

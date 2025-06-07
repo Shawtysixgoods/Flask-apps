@@ -1,0 +1,7 @@
+# requirements.txt — файл для указания зависимостей Python-проекта
+# Flask — основной веб-фреймворк
+Flask
+# Flask-WTF — расширение для интеграции WTForms с Flask
+Flask-WTF
+# WTForms — библиотека для работы с веб-формами
+WTForms

@@ -1,0 +1,45 @@
+{#
+    dialog.html — шаблон для отображения диалога между двумя пользователями
+    Jinja2 — шаблонизатор, используемый Flask
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Диалог: {{ user1.username }} ↔ {{ user2.username }}</title>
+</head>
+<body>
+    <h1>Диалог между {{ user1.username }} и {{ user2.username }}</h1>
+    <ul>
+    {#
+        Перебираем все сообщения между пользователями и выводим их
+        Показываем, кто отправитель, содержимое и время
+    #}
+    {% for message in messages %}
+        <li>
+            <strong>{{ message.sender.username }}</strong> → <strong>{{ message.recipient.username }}</strong>:
+            {{ message.content }}
+            <em>({{ message.timestamp }})</em>
+        </li>
+    {% else %}
+        <li>Сообщений пока нет.</li>
+    {% endfor %}
+    </ul>
+    <h2>Отправить сообщение</h2>
+    <form method="POST">
+        <label for="content">Сообщение:</label><br>
+        <textarea id="content" name="content" rows="3" cols="40" required></textarea><br>
+        <button type="submit">Отправить</button>
+    </form>
+    <p><a href="{{ url_for('index') }}">Назад к списку пользователей</a></p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

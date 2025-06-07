@@ -1,0 +1,29 @@
+{#
+    new_topic.html — шаблон для создания новой темы
+    Jinja2 — шаблонизатор, используемый Flask
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать новую тему</title>
+</head>
+<body>
+    <h1>Создать новую тему</h1>
+    <form method="POST">
+        <label for="title">Название темы:</label><br>
+        <input type="text" id="title" name="title" required><br>
+        <button type="submit">Создать</button>
+    </form>
+    <p><a href="{{ url_for('index') }}">Назад к списку тем</a></p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

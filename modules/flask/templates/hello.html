@@ -1,0 +1,18 @@
+{#
+    hello.html — шаблон для приветствия пользователя по имени
+    Jinja2 — шаблонизатор, используемый Flask
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Приветствие</title>
+</head>
+<body>
+    {#
+        Переменная name передаётся из функции hello
+    #}
+    <h1>Привет, {{ name }}!</h1>
+    <p><a href="{{ url_for('index') }}">На главную</a></p>
+</body>
+</html>

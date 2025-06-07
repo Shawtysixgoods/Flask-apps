@@ -1,0 +1,49 @@
+{#
+    index.html — шаблон для вывода всех товаров
+    Jinja2 — шаблонизатор, используемый Flask
+    Подробнее: https://jinja.palletsprojects.com/
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+</head>
+<body>
+    <h1>Список товаров</h1>
+    {#
+        Ссылки на регистрацию, добавление товара и оформление заказа
+        url_for — функция Flask для генерации URL по имени маршрута
+    #}
+    <p>
+        <a href="{{ url_for('register') }}">Регистрация пользователя</a> |
+        <a href="{{ url_for('add_product') }}">Добавить товар</a> |
+        <a href="{{ url_for('order') }}">Оформить заказ</a> |
+        <a href="{{ url_for('orders') }}">Все заказы</a>
+    </p>
+    <ul>
+    {#
+        Перебираем все товары и выводим их названия с ссылкой на подробный просмотр
+    #}
+    {% for product in products %}
+        <li>
+            <a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a> — {{ product.price }} руб.
+        </li>
+    {% else %}
+        <li>Товаров пока нет.</li>
+    {% endfor %}
+    </ul>
+    {#
+        Выводим flash-сообщения, если они есть
+    #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

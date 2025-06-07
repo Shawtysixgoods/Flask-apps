@@ -1,0 +1,44 @@
+{#
+    index.html — шаблон для вывода всех тем форума
+    Jinja2 — шаблонизатор, используемый Flask
+    Подробнее: https://jinja.palletsprojects.com/
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Форум</title>
+</head>
+<body>
+    <h1>Список тем форума</h1>
+    {#
+        Ссылка на создание новой темы
+        url_for — функция Flask для генерации URL по имени маршрута
+    #}
+    <p><a href="{{ url_for('new_topic') }}">Создать новую тему</a></p>
+    <ul>
+    {#
+        Перебираем все темы и выводим их названия с ссылкой на подробный просмотр
+    #}
+    {% for topic in topics %}
+        <li>
+            <a href="{{ url_for('topic_detail', topic_id=topic.id) }}">{{ topic.title }}</a>
+        </li>
+    {% else %}
+        <li>Тем пока нет.</li>
+    {% endfor %}
+    </ul>
+    {#
+        Выводим flash-сообщения, если они есть
+    #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

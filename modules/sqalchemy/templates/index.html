@@ -1,0 +1,46 @@
+{#
+    index.html — шаблон для вывода всех постов
+    Jinja2 — шаблонизатор, используемый Flask
+    Подробнее: https://jinja.palletsprojects.com/
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Все посты</title>
+</head>
+<body>
+    <h1>Список постов</h1>
+    {#
+        Ссылка на создание нового поста
+        url_for — функция Flask для генерации URL по имени маршрута
+        Подробнее: https://flask.palletsprojects.com/en/latest/quickstart/#url-building
+    #}
+    <p><a href="{{ url_for('new_post') }}">Создать новый пост</a></p>
+    {#
+        Перебираем все посты и выводим их заголовки с ссылкой на подробный просмотр
+    #}
+    <ul>
+    {% for post in posts %}
+        <li>
+            <a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a>
+        </li>
+    {% else %}
+        <li>Постов пока нет.</li>
+    {% endfor %}
+    </ul>
+    {#
+        Выводим flash-сообщения, если они есть
+        Подробнее: https://flask.palletsprojects.com/en/latest/patterns/flashing/
+    #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!-- Наследуем базовый шаблон -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Главная страница</h1>
+    
+    <!-- Отображение информации о сессии -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5>Текущий статус:</h5>
+            {% if session.user %}
+                <p>Вы вошли как: <strong>{{ session.user }}</strong></p>
+            {% else %}
+                <p>Вы не авторизованы</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Навигационные кнопки -->
+    <div class="d-grid gap-2">
+        {% if session.user %}
+            <a href="{{ url_for('protected') }}" class="btn btn-primary">
+                Защищенная страница
+            </a>
+            <a href="{{ url_for('logout') }}" class="btn btn-secondary">
+                Выход
+            </a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn btn-success">
+                Авторизация
+            </a>
+        {% endif %}
+        
+        <!-- Демонстрационная кнопка -->
+        <a href="#" class="btn btn-info" onclick="alert('Обычное сообщение без flash')">
+            Тест без flash
+        </a>
+    </div>
+{% endblock %}

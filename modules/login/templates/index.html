@@ -1,0 +1,33 @@
+{#
+    index.html — шаблон для главной страницы (только для авторизованных пользователей)
+    Jinja2 — шаблонизатор, используемый Flask
+    Подробнее: https://jinja.palletsprojects.com/
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+    <h1>Добро пожаловать, {{ username }}!</h1>
+    {#
+        Ссылка для выхода из системы
+        url_for — функция Flask для генерации URL по имени маршрута
+        Подробнее: https://flask.palletsprojects.com/en/latest/quickstart/#url-building
+    #}
+    <p><a href="{{ url_for('logout') }}">Выйти</a></p>
+    {#
+        Выводим flash-сообщения, если они есть
+    #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

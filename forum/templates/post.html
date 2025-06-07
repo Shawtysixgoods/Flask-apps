@@ -1,0 +1,46 @@
+{#
+    post.html — шаблон для просмотра поста и комментариев
+    Jinja2 — шаблонизатор, используемый Flask
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пост №{{ post.id }}</title>
+</head>
+<body>
+    <h1>Пост №{{ post.id }}</h1>
+    <p><strong>Автор:</strong> {{ post.author.username }}</p>
+    <div>
+        <p>{{ post.content }}</p>
+    </div>
+    <h2>Комментарии</h2>
+    <ul>
+    {% for comment in comments %}
+        <li>
+            <strong>{{ comment.author.username }}:</strong> {{ comment.content }}
+        </li>
+    {% else %}
+        <li>Комментариев пока нет.</li>
+    {% endfor %}
+    </ul>
+    <h3>Добавить комментарий</h3>
+    <form method="POST">
+        <label for="username">Имя пользователя:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="content">Комментарий:</label><br>
+        <textarea id="content" name="content" rows="3" cols="40" required></textarea><br>
+        <button type="submit">Добавить</button>
+    </form>
+    <p><a href="{{ url_for('topic_detail', topic_id=post.topic.id) }}">Назад к теме</a></p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Защищенная страница</h1>
+    
+    <div class="alert alert-success">
+        <!-- Приветствие авторизованного пользователя -->
+        <h4>Добро пожаловать, {{ username }}!</h4>
+        <p>Это страница доступна только авторизованным пользователям.</p>
+    </div>
+    
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">
+        На главную
+    </a>
+{% endblock %}

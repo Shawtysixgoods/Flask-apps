@@ -1,0 +1,39 @@
+{#
+    login.html — шаблон для формы входа пользователя
+    Jinja2 — шаблонизатор, используемый Flask
+    Подробнее: https://jinja.palletsprojects.com/
+#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+</head>
+<body>
+    <h1>Вход в систему</h1>
+    {#
+        Форма отправляется методом POST на этот же маршрут
+        Вводим имя пользователя и пароль
+    #}
+    <form method="POST">
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required><br>
+        <button type="submit">Войти</button>
+    </form>
+    {#
+        Выводим flash-сообщения, если они есть
+        Подробнее: https://flask.palletsprojects.com/en/latest/patterns/flashing/
+    #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
